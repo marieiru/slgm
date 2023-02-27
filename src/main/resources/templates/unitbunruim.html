@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+
+<title>ユニット分類マスタ</title>
+</head>
+
+<body>
+
+	<nav class="unitbunruim navbar-expand-lg fixed-top navbar-dark"
+		layout:fragment="nav">
+
+
+		<h1>ユニット分類マスタ</h1>
+
+		<h3 th:text="${title}">タイトル</h3>
+
+		<form method="post" enctype="multipart/form-data"
+			th:action="${formUnitbunruim.newUnitbunruim}? @{/unitbunruim/insert} : @{/unitbunruim/update}"
+			th:object="${formUnitbunruim}">
+
+
+
+			<label>ユニット分類:</label> <br> <input type="text"
+				th:field="*{brname}" /> <br>
+
+			<div th:if="${#fields.hasErrors('brname')}" th:errors="*{brname}"
+				style="color: red"></div>
+
+			<input th:if="${id}" type="hidden" th:field="*{id}" /> <br> <input
+				type="submit" value="登録" name="SOUSIN">
+
+		</form>
+		
+		 <a href="#" th:href="@{/unitbunruim}">ユニット分類マスタ画面に戻る</a> <br>
+		<a href="#" th:href="@{/menu}">Menu画面に戻る</a>
+
+
+		<div th:if="${formUnitbunruim.newUnitbunruim}" style="margin: 10px">
+
+			<table border="1" th:unless="${#lists.isEmpty(list)}"
+				style="table-layout: fixed;">
+				<tr>
+					<th>ID</th>
+					<th>ユニット分類</th>
+					<th>編集</th>
+					<th>削除</th>
+				</tr>
+
+				<tr th:each="obj : ${list}" align="center">
+
+					<td th:text="${obj.id}"></td>
+					<td th:text="${obj.brname}" align="left"></td>
+
+					<td>
+						<form method="GET" th:action="@{/unitbunruim/{id}(id=${obj.id})}">
+							<input type="submit" value="編集">
+						</form>
+					</td>
+
+
+					<td>
+						<form method="POST" th:action="@{/unitbunruim/delete}">
+							<input type="hidden" name="id" th:value="${obj.id}"> <input
+								type="submit" value="削除">
+						</form>
+					</td>
+				</tr>
+			</table>
+
+
+
+			<p th:if="${#lists.isEmpty(list)}">登録されているユニット分類はありません。</p>
+
+		</div>
+
+
+
+	</nav>
+
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+
+<title>ユニット構成員情報検索</title>
+</head>
+
+<body>
+
+	<nav class="unitkousei_f navbar-expand-lg fixed-top navbar-dark"
+		layout:fragment="nav">
+
+		<h1>ユニット構成員情報検索</h1>
+
+		<h3 th:text="${title}">タイトル</h3>
+
+		<form method="get" th:action="@{/unitkousei_f/select}"
+			th:object="${formUnitkousei}">
+
+			<label>所属戦団:</label> <select name="syozoku" th:field="*{sid}">
+				<option value="00"></option>
+				<option th:each="sendan : ${prefecturesList}"
+					th:value="${sendan.id}" th:text="${sendan.fname}"
+					th:selected="${sendan.id == selectedValue}"></option>
+			</select> <br> <label>ユニット分類:</label> <select name="bunrui"
+				th:field="*{bid}">
+				<option value="00"></option>
+				<option th:each="unitbunruim : ${unitbunrui}"
+					th:value="${unitbunruim.id}" th:text="${unitbunruim.brname}"
+					th:selected="${unitbunruim.id == selectedValue}"></option>
+			</select> <br> <input th:if="${kid}" type="hidden" th:field="*{kid}" />
+			<br> <input type="submit" value="検索" name="kensaku">
+
+		</form>
+
+
+		<a href="#" th:href="@{/unitkousei/index}">ユニット構成員情報画面に戻る</a> <br>
+		<a href="#" th:href="@{/unitkousei_f/index}">ユニット構成員情報検索画面に戻る</a> <br>
+
+		<a href="#" th:href="@{/menu}">Menu画面に戻る</a>
+
+
+		<table border="1"
+			th:if="${kouseiList != null && kouseiList.size() >= 1}">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>構成員名称</th>
+					<th>所属戦団</th>
+					<th>ユニット分類</th>
+					<th>攻撃</th>
+					<th>耐久</th>
+					<th>傷</th>
+					<th>白兵回数</th>
+					<th>気力</th>
+					<th>防御1</th>
+					<th>防御2</th>
+					<th>アビリティ</th>
+					<th>編集</th>
+					<th>削除</th>
+				</tr>
+			</thead>
+
+			<tbody th:each="obj : ${kouseiList}" align="center" th:object=${obj}>
+				<tr>
+
+					<td th:text="${obj.kid}"></td>
+					<td th:text="${obj.kname}" align="left"></td>
+
+					<td th:text="${obj.sendanm.fname}"></td>
+
+					<td th:text="${obj.unitbunruim.brname}" align="left"></td>
+
+					<td th:text="${obj.at}"></td>
+					<td th:text="${obj.taff}"></td>
+					<td th:text="${obj.uunz}"></td>
+					<td th:text="${obj.ak}"></td>
+					<td th:text="${obj.ld}"></td>
+					<td th:text="${obj.asa}"></td>
+					<td th:text="${obj.assp}"></td>
+					<td th:text="${obj.abl}" align="left"></td>
+
+					<td>
+						<form method="GET"
+							th:action="@{/unitkousei/{kid}(kid=${obj.kid})}">
+							<input type="submit" value="編集">
+						</form>
+					</td>
+
+
+					<td>
+						<form method="POST" th:action="@{/unitkousei/delete}">
+							<input type="hidden" name="kid" th:value="${obj.kid}"> <input
+								type="submit" value="削除">
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div th:if="${kouseiList != null && kouseiList.size() == 0}">登録されているユニット構成員情報はありません。</div>
+
+
+
+	</nav>
+
+
+</body>
+
+</html>

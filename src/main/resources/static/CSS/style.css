@@ -1,0 +1,176 @@
+nav.navbar {
+	color: blue;
+	width: 100vw;
+	height: 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/empe.jpg');
+	background-repeat: repeat-y
+}
+
+h1 {
+	color: red;
+}
+
+h3 {
+	color: red;
+}
+
+h2 {
+	margin-left: 800px;
+	color: red;
+}
+
+nav.sendan {
+	color: red;
+	width: 100vw; height : 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/marines.jpg');
+	background-repeat: repeat-y;
+	height: 100vh;
+}
+
+nav.battle {
+	color: red;
+	width: 100vw; height : 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/battle.jpg');
+	background-repeat: repeat-y;
+	height: 100vh;
+}
+
+nav.bukim {
+	color: red;
+	width: 100vw;
+	height: 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/bukim.jpg');
+	background-repeat: repeat-y
+}
+
+nav.bukim_f {
+	color: red;
+	width: 100vw; height : 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/bukim_f.jpg');
+	background-repeat: repeat-y;
+	height: 100vh;
+}
+
+nav.unitrekka {
+	color: red;
+	width: 100vw; height : 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/unitrekka.jpg');
+	background-repeat: repeat-y;
+	height: 100vh;
+}
+
+nav.unitrekka_f {
+	color: red;
+	width: 100vw; height : 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/unitrekka_f.jpg');
+	background-repeat: repeat-y;
+	height: 100vh;
+}
+
+nav.unitrekka_t {
+	color: red;
+	width: 100vw; height : 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/unitrekka_t.jpg');
+	background-repeat: repeat-y;
+	height: 100vh;
+}
+
+nav.unitkousei {
+	color: red;
+	background-size: 100%;
+	background-image: url('/css/img/unitkousei.jpg');
+	background-repeat: repeat-y
+}
+
+nav.unitkousei_f {
+	color: red;
+	background-size: 100%;
+	background-image: url('/css/img/unitkousei_f.jpg');
+	background-repeat: repeat-y
+}
+
+nav.unitkousei_h {
+	color: red;
+	background-size: 100%;
+	background-image: url('/css/img/unitkousei_h.jpg');
+	background-repeat: repeat-y
+}
+
+nav.unitkousei_kai {
+	color: red;
+	background-size: 100%;
+	background-image: url('/css/img/unitkousei_kai.jpg');
+	background-repeat: repeat-y
+}
+
+nav.unitbunruim {
+	color: red;
+	width: 100vw; height : 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/unitbunruim.jpg');
+	background-repeat: repeat-y;
+	height: 100vh;
+}
+
+nav.unitjyouhou {
+	color: red;
+	background-size: 100%;
+	background-image: url('/css/img/unitjyouhou.jpg');
+	background-repeat: repeat-y
+}
+
+nav.unitjyouhou_f {
+	color: red;
+	background-size: 100%;
+	background-image: url('/css/img/unitjyouhou_f.jpg');
+	background-repeat: repeat-y
+}
+
+nav.unityakuwarim {
+	color: red;
+	width: 100vw; height : 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/unityakuwarim.jpg');
+	background-repeat: repeat-y;
+	height: 100vh;
+}
+
+nav.chapter1 {
+	color: blue;
+	width: 100vw; height : 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/chapter1.jpg');
+	background-repeat: repeat-y;
+	height: 100vh;
+}
+
+.wrap {
+	color: blue;
+	display: grid;
+	grid-template-rows: 100%;
+	grid-template-columns: 50% 50%;
+}
+
+nav.chapter2 {
+	color: blue;
+	width: 100vw; height : 100vh;
+	background-size: 100%;
+	background-image: url('/css/img/chapter2.jpg');
+	background-repeat: repeat-y;
+	height: 100vh;
+}
+
+.wrap {
+	color: blue;
+	display: grid;
+	grid-template-rows: 100%;
+	grid-template-columns: 50% 50%;
+}

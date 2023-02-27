@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+
+<title>ユニット構成員情報</title>
+</head>
+
+<body>
+
+	<nav class="unitkousei navbar-expand-lg fixed-top navbar-dark"
+		layout:fragment="nav">
+
+
+		<h1>ユニット構成員情報</h1>
+
+		<h3 th:text="${title}">タイトル</h3>
+
+
+		<form method="post" enctype="multipart/form-data"
+			th:action="${formUnitkousei.newUnitkousei}? @{/unitkousei/insert} : @{/unitkousei/update}"
+			th:object="${formUnitkousei}">
+
+
+			<label>ユニット番号:</label> <input type="number" th:field="*{zid}"
+				readonly /><br>
+			<div th:if="${#fields.hasErrors('zid')}" th:errors="*{zid}"
+				style="color: red"></div>
+
+
+
+			<label>ユニット分類:</label> <select name="bunrui" th:field="*{bid}">
+				<option value="00"></option>
+				<option th:each="unitbunruim : ${unitbunrui}"
+					th:value="${unitbunruim.id}" th:text="${unitbunruim.brname}"
+					th:selected="${unitbunruim.id == selectedValue}"></option>
+			</select> <br> <label>構成員名称:</label> <input type="text"
+				th:field="*{kname}" /> <br>
+			<div th:if="${#fields.hasErrors('kname')}" th:errors="*{kname}"
+				style="color: red"></div>
+
+			<label>攻撃:</label> <input type="number" th:field="*{at}"
+				onkeyup="value > 15 ? value.slice(1): value;" max="15" /><br>
+
+			<div th:if="${#fields.hasErrors('at')}" th:errors="*{at}"
+				style="color: red"></div>
+
+			<label>耐久:</label> <input type="number" th:field="*{taff}"
+				onkeyup="value > 15 ? value.slice(1): value;" max="15" /><br>
+
+			<div th:if="${#fields.hasErrors('taff')}" th:errors="*{taff}"
+				style="color: red"></div>
+
+			<label>傷:</label> <input type="number" th:field="*{uunz}"
+				onkeyup="value > 20 ? value.slice(1): value;" max="20" /><br>
+
+			<div th:if="${#fields.hasErrors('uunz')}" th:errors="*{uunz}"
+				style="color: red"></div>
+
+			<label>白兵回数:</label> <input type="number" th:field="*{ak}"
+				onkeyup="value > 20 ? value.slice(1): value;" max="20" /><br>
+
+			<div th:if="${#fields.hasErrors('ak')}" th:errors="*{ak}"
+				style="color: red"></div>
+
+
+			<label>気力:</label> <input type="number" th:field="*{ld}"
+				onkeyup="value > 10 ? value.slice(1): value;" max="10" /><br>
+
+			<div th:if="${#fields.hasErrors('ld')}" th:errors="*{ld}"
+				style="color: red"></div>
+
+			<label>防御1:</label> <input type="number" th:field="*{asa}"
+				onkeyup="value > 6 ? value.slice(1): value;" max="6" /><br>
+
+			<div th:if="${#fields.hasErrors('asa')}" th:errors="*{asa}"
+				style="color: red"></div>
+
+			<label>防御2:</label> <input type="number" th:field="*{assp}"
+				onkeyup="value > 6 ? value.slice(1): value;" max="6" /><br>
+
+			<div th:if="${#fields.hasErrors('assp')}" th:errors="*{assp}"
+				style="color: red"></div>
+
+			<label>アビリティ:</label> <input type="text" th:field="*{abl}" /><br>
+
+			<div th:if="${#fields.hasErrors('abl')}" th:errors="*{abl}"
+				style="color: red"></div>
+
+			<label>装備武器1:</label> <select name="buki" th:field="*{wno}">
+				<option value="00"></option>
+
+				<option th:each="bukiList : ${bukiList}" th:value="${bukiList.wno}"
+					th:text="${bukiList.wname}"
+					th:selected="${bukiList.wno == selectedValue}"></option>
+			</select> <br> <label>装備武器2:</label> <select name="buki2"
+				th:field="*{wno2}">
+				<option value="00"></option>
+				<option th:each="bukiList : ${bukiList}" th:value="${bukiList.wno}"
+					th:text="${bukiList.wname}"
+					th:selected="${bukiList.wno == selectedValue}"></option>
+			</select> <br> <label>装備武器3:</label> <select name="buki3"
+				th:field="*{wno3}">
+				<option value="00"></option>
+				<option th:each="bukiList : ${bukiList}" th:value="${bukiList.wno}"
+					th:text="${bukiList.wname}"
+					th:selected="${bukiList.wno == selectedValue}"></option>
+			</select> <br> <label>装備武器4:</label> <select name="buki4"
+				th:field="*{wno4}">
+				<option value="00"></option>
+				<option th:each="bukiList : ${bukiList}" th:value="${bukiList.wno}"
+					th:text="${bukiList.wname}"
+					th:selected="${bukiList.wno == selectedValue}"></option>
+			</select> <br> <label>白兵武器1:</label> <select name="buki5"
+				th:field="*{wno5}">
+				<option value="00"></option>
+				<option th:each="bukiList3 : ${bukiList3}"
+					th:value="${bukiList3.wno}" th:text="${bukiList3.wname}"
+					th:selected="${bukiList3.wno == selectedValue}"></option>
+			</select> <br> <label>白兵武器2:</label> <select name="buki6"
+				th:field="*{wno6}">
+				<option value="00"></option>
+				<option th:each="bukiList3 : ${bukiList3}"
+					th:value="${bukiList3.wno}" th:text="${bukiList3.wname}"
+					th:selected="${bukiList3.wno == selectedValue}"></option>
+			</select> <br> <label>白兵武器3:</label> <select name="buki7"
+				th:field="*{wno7}">
+				<option value="00"></option>
+				<option th:each="bukiList3 : ${bukiList3}"
+					th:value="${bukiList3.wno}" th:text="${bukiList3.wname}"
+					th:selected="${bukiList3.wno == selectedValue}"></option>
+			</select> <br> <label>移動力:</label> <input type="number" th:field="*{mv}"
+				onkeyup="value > 99 ? value.slice(1): value;" max="99" /><br>
+
+			<div th:if="${#fields.hasErrors('mv')}" th:errors="*{mv}"
+				style="color: red"></div>
+
+
+			<label>登録人数:</label> <input type="number" th:field="*{kazu}"
+				onkeyup="value > 30 ? value.slice(1): value;" max="30" /><br>
+
+			<div th:if="${#fields.hasErrors('kazu')}" th:errors="*{kazu}"
+				style="color: red"></div>
+
+
+
+			<input th:if="${kid}" type="hidden" th:field="*{kid}" /> <br> <input
+				type="submit" value="登録" name="SOUSIN">
+
+		</form>
+
+		<a href="#" th:href="@{/unitkousei_kai/index}">ユニット構成員情報画面に戻る</a> <br>
+
+
+		<a href="#" th:href="@{/menu}">Menu画面に戻る</a>
+
+
+		<table border="1"
+			th:if="${kouseiList != null && kouseiList.size() >= 1}">
+			<thead>
+				<tr>
+					<th>ユニット番号</th>
+					<th>構成員番号</th>
+					<th>構成員名称</th>
+
+					<th>ユニット分類</th>
+					<th>攻撃</th>
+					<th>耐久</th>
+					<th>傷</th>
+					<th>白兵回数</th>
+					<th>気力</th>
+					<th>防御1</th>
+					<th>防御2</th>
+					<th>アビリティ</th>
+
+					<th>装備武器1</th>
+					<th>装備武器2</th>
+					<th>装備武器3</th>
+					<th>装備武器4</th>
+
+					<th>白兵武器1</th>
+					<th>白兵武器2</th>
+					<th>白兵武器3</th>
+					<th>移動力</th>
+					<th>編集</th>
+					<th>削除</th>
+				</tr>
+			</thead>
+
+			<tbody th:each="obj : ${kouseiList}" align="center" th:object=${obj}>
+				<tr>
+					<td th:text="${obj.zid}"></td>
+					<td th:text="${obj.kid}"></td>
+					<td th:text="${obj.kname}" align="left"></td>
+
+
+					<td th:text="${obj.unitbunruim.brname}" align="left"></td>
+
+					<td th:text="${obj.at}"></td>
+					<td th:text="${obj.taff}"></td>
+					<td th:text="${obj.uunz}"></td>
+					<td th:text="${obj.ak}"></td>
+					<td th:text="${obj.ld}"></td>
+					<td th:text="${obj.asa}"></td>
+					<td th:text="${obj.assp}"></td>
+					<td th:text="${obj.abl}" align="left"></td>
+
+					<td th:text="${obj.bukim.wname}" align="left"></td>
+					<td th:text="${obj.bukim2.wname}" align="left"></td>
+					<td th:text="${obj.bukim3.wname}" align="left"></td>
+
+					<td th:text="${obj.bukim4.wname}" align="left"></td>
+					<td th:text="${obj.bukim5.wname}" align="left"></td>
+					<td th:text="${obj.bukim6.wname}" align="left"></td>
+					<td th:text="${obj.bukim7.wname}" align="left"></td>
+					<td th:text="${obj.mv}"></td>
+
+					<td>
+						<form method="GET"
+							th:action="@{/unitkousei_h/{kid}(kid=${obj.kid})}">
+							<input type="submit" value="編集">
+						</form>
+					</td>
+
+
+					<td>
+						<form method="POST" th:action="@{/unitkousei/delete}">
+							<input type="hidden" name="kid" th:value="${obj.kid}"> <input
+								type="hidden" name="zid" th:value="${obj.zid}"> <input
+								type="submit" value="削除">
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div th:if="${kouseiList != null && kouseiList.size() == 0}">登録されているユニット構成員情報はありません。</div>
+
+
+
+
+
+	</nav>
+
+
+</body>
+
+</html>

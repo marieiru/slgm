@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+
+<title>ユニット情報</title>
+</head>
+
+<body>
+	<nav class="unitjyouhou navbar-expand-lg fixed-top navbar-dark"
+		layout:fragment="nav">
+
+
+
+		<h1>ユニット情報</h1>
+
+		<h3 th:text="${title}">タイトル</h3>
+
+		<form method="post" enctype="multipart/form-data"
+			th:action="${formUnitjyouhou.newUnitjyouhou}? @{/unitjyouhou/insert} : @{/unitjyouhou/update}"
+			th:object="${formUnitjyouhou}">
+
+			<label>画像:</label> <br> <input type="file" name="file"
+				accept="image/jpeg" /> <br> <label>ここは登録時は空欄で良いです:</label> <input
+				type="text" th:field="*{img}" /> <br> <br> <label>ユニット名称:</label>
+			<input type="text" th:field="*{yuname}" /> <br>
+
+			<div th:if="${#fields.hasErrors('yuname')}" th:errors="*{yuname}"
+				style="color: red"></div>
+
+
+			<label>所属戦団:</label> <select name="syozoku" th:field="*{sid}">
+				<option value="00"></option>
+				<option th:each="sendan : ${prefecturesList}"
+					th:value="${sendan.id}" th:text="${sendan.fname}"
+					th:selected="${sendan.id == selectedValue}"></option>
+			</select> <br>
+
+
+			<div th:if="${#fields.hasErrors('sid')}" th:errors="*{sid}"
+				style="color: red"></div>
+
+
+			<label>ユニット役割:</label> <select name="yakuwari" th:field="*{yid}">
+				<option value="00"></option>
+				<option th:each="yakuwari : ${unityakuwari}"
+					th:value="${yakuwari.id}" th:text="${yakuwari.ywname}"
+					th:selected="${yakuwari.id == selectedValue}"></option>
+			</select> <br>
+
+			<div th:if="${#fields.hasErrors('yid')}" th:errors="*{yid}"
+				style="color: red"></div>
+
+			<label>パワーコスト:</label> <input type="number" th:field="*{pck}"
+				onkeyup="value > 50 ? value.slice(1): value;" max="50" /><br>
+
+			<div th:if="${#fields.hasErrors('pck')}" th:errors="*{pck}"
+				style="color: red"></div>
+
+
+			<label>現実価格:</label> <input type="number" th:field="*{mck}"
+				onkeyup="value > 50000 ? value.slice(1): value;" max="50000" /><br>
+
+			<div th:if="${#fields.hasErrors('mck')}" th:errors="*{mck}"
+				style="color: red"></div>
+
+			<label>構成員人数:</label> <input type="number" th:field="*{ninnzuu}"
+				onkeyup="value > 10 ? value.slice(1): value;" max="10" /><br>
+
+			<div th:if="${#fields.hasErrors('ninnzuu')}" th:errors="*{ninnzuu}"
+				style="color: red"></div>
+
+			<label>構成員増員数:</label> <input type="number" th:field="*{zouin}"
+				onkeyup="value > 20 ? value.slice(1): value;" max="20" /><br>
+
+			<div th:if="${#fields.hasErrors('zouin')}" th:errors="*{zouin}"
+				style="color: red"></div>
+
+			<label>構成員総数:</label> <input type="number" th:field="*{sousuu}"
+				onkeyup="value > 50 ? value.slice(1): value;" max="50" /><br>
+
+			<div th:if="${#fields.hasErrors('sousuu')}" th:errors="*{sousuu}"
+				style="color: red"></div>
+
+			<label>増員区分:</label> <input type="number" th:field="*{kbzouin}"
+				onkeyup="value > 1 ? value.slice(1): value;" max="1" /><br>
+
+			<div th:if="${#fields.hasErrors('kbzouin')}" th:errors="*{kbzouin}"
+				style="color: red"></div>
+
+
+			<input th:if="${zid}" type="hidden" th:field="*{zid}" /> <br> <input
+				type="submit" value="登録" name="SOUSIN">
+
+		</form>
+
+
+		<a href="#" th:href="@{/unitjyouhou/index}">ユニット情報画面に戻る</a> <br>
+		<a href="#" th:href="@{/unitjyouhou_f/index}">ユニット情報検索画面に戻る</a> <br>
+		<a href="#" th:href="@{/menu}">Menu画面に戻る</a>
+
+
+		<table border="1"
+			th:if="${jyouhouList != null && jyouhouList.size() >= 1}">
+			<thead>
+				<tr>
+
+					<th>ID</th>
+					<th>画像</th>
+					<th>ユニット名称</th>
+					<th>所属戦団</th>
+
+					<th>ユニット役割</th>
+					<th>パワーコスト</th>
+					<th>現実価格</th>
+					<th>構成員人数</th>
+					<th>構成員増員数</th>
+					<th>構成員総数</th>
+					<th>増員区分</th>
+					<th>編集</th>
+					<th>削除</th>
+
+				</tr>
+			</thead>
+
+			<tbody th:each="obj : ${jyouhouList}" align="center" th:object=${obj}>
+				<tr>
+
+					<td th:text="${obj.zid}"></td>
+
+					<td><img th:src="${'/images/'+ obj.img}" alt="" width="100"
+						height="100"></td>
+
+					<td th:text="${obj.yuname}" align="left"></td>
+					<td th:text="${obj.sendanm.fname}" align="left"></td>
+
+					<td th:text="${obj.unityakuwarim.ywname}" align="left"></td>
+
+					<td th:text="${obj.pck}"></td>
+					<td th:text="${obj.mck}"></td>
+					<td th:text="${obj.ninnzuu}"></td>
+					<td th:text="${obj.zouin}"></td>
+					<td th:text="${obj.sousuu}"></td>
+					<td th:text="${obj.kbzouin}"></td>
+
+					<td>
+						<form method="GET"
+							th:action="@{/unitjyouhou/{zid}(zid=${obj.zid})}">
+							<input type="submit" value="編集">
+						</form>
+					</td>
+
+
+					<td>
+						<form method="POST" th:action="@{/unitjyouhou/delete}">
+							<input type="hidden" name="zid" th:value="${obj.zid}"> <input
+								type="submit" value="削除">
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<div th:if="${jyouhouList != null && jyouhouList.size() == 0}">登録されているユニット情報はありません。</div>
+
+
+
+
+	</nav>
+
+
+</body>
+
+</html>

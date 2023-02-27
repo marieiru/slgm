@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+
+<title>戦団マスタ</title>
+</head>
+
+<body>
+	<nav class="sendan navbar-expand-lg fixed-top navbar-dark" layout:fragment="nav">
+
+		<h1>戦団マスタ</h1>
+
+		<h3 th:text="${title}">タイトル</h3>
+
+		<form method="post" enctype="multipart/form-data"
+			th:action="${formSendanm.newSendanm}? @{/sendanm/insert} : @{/sendanm/update}"
+			th:object="${formSendanm}">
+
+
+			<label>戦団名:</label> <br> <input type="text" th:field="*{fname}" />
+			<br>
+
+			<div th:if="${#fields.hasErrors('fname')}" th:errors="*{fname}"
+				style="color: red"></div>
+
+			<input th:if="${id}" type="hidden" th:field="*{id}" /> <br> <input
+				type="submit" value="登録" name="SOUSIN">
+
+		</form>
+	
+		<a href="#" th:href="@{/sendanm}">戦団マスタ画面に戻る</a> <br> <a href="#"
+			th:href="@{/menu}">Menu画面に戻る</a>
+
+
+
+		<div th:if="${formSendanm.newSendanm}" style="margin: 10px">
+
+			<table border="1" th:unless="${#lists.isEmpty(list)}"
+				style="table-layout: fixed;">
+				<tr>
+					<th>ID</th>
+					<th>戦団</th>
+					<th>編集</th>
+					<th>削除</th>
+				</tr>
+
+				<tr th:each="obj : ${list}" align="center">
+
+					<td th:text="${obj.id}"></td>
+					<td th:text="${obj.fname}" align="left"></td>
+
+					<td>
+						<form method="GET" th:action="@{/sendanm/{id}(id=${obj.id})}">
+							<input type="submit" value="編集">
+						</form>
+					</td>
+
+
+					<td>
+						<form method="POST" th:action="@{/sendanm/delete}">
+							<input type="hidden" name="id" th:value="${obj.id}"> <input
+								type="submit" value="削除">
+						</form>
+					</td>
+				</tr>
+			</table>
+
+
+
+			<p th:if="${#lists.isEmpty(list)}">登録されている戦団はありません。</p>
+
+		</div>
+
+
+
+
+	</nav>
+
+
+</body>
+
+</html>
