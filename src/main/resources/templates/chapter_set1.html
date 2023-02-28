@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+
+<title>先攻チャプター編成</title>
+</head>
+
+<body>
+
+	<nav class="chapter1 navbar-expand-lg fixed-top navbar-dark"
+		layout:fragment="nav">
+
+		<h1>先攻チャプター編成</h1>
+
+		<h3 th:text="${title}">タイトル</h3>
+
+		<h1>ユニット情報を指定して先攻チャプターを登録する</h1>
+
+		<form method="get" th:action="@{/chapter_set1/select}"
+			th:object="${formUnitjyouhou}">
+
+			<label>所属戦団:</label> <select name="syozoku" th:field="*{sid}">
+				<option value="00"></option>
+				<option th:each="sendan : ${prefecturesList}"
+					th:value="${sendan.id}" th:text="${sendan.fname}"
+					th:selected="${sendan.id == selectedValue}"></option>
+			</select> <br> <label>ユニット役割:</label> <select name="yakuwari"
+				th:field="*{yid}">
+				<option value="00"></option>
+				<option th:each="yakuwari : ${unityakuwari}"
+					th:value="${yakuwari.id}" th:text="${yakuwari.ywname}"
+					th:selected="${yakuwari.id == selectedValue}"></option>
+			</select> <br> <input th:if="${id}" type="hidden" th:field="*{id}" /> <br>
+
+			<input type="submit" value="検索" name="SOUSIN">
+
+		</form>
+
+		<br>
+
+
+		<table border="1"
+			th:if="${jyouhouList != null && jyouhouList.size() >= 1}">
+			<thead>
+				<tr>
+
+					<th>ID</th>
+					<th>画像</th>
+					<th>ユニット名称</th>
+					<th>所属戦団</th>
+
+					<th>ユニット役割</th>
+					<th>パワーコスト</th>
+					<th>現実価格</th>
+					<th>構成員人数</th>
+					<th>構成員増員数</th>
+					<th>構成員総数</th>
+					<th>増員区分</th>
+					<th>登録</th>
+
+				</tr>
+			</thead>
+
+			<tbody th:each="obj : ${jyouhouList}" align="center" th:object=${obj}>
+				<tr>
+
+					<td th:text="${obj.zid}"></td>
+
+					<td><img th:src="${'/images/'+ obj.img}" alt="" width="100"
+						height="100"></td>
+
+					<td th:text="${obj.yuname}" align="left"></td>
+					<td th:text="${obj.sendanm.fname}" align="left"></td>
+
+					<td th:text="${obj.unityakuwarim.ywname}" align="left"></td>
+
+					<td th:text="${obj.pck}"></td>
+					<td th:text="${obj.mck}"></td>
+					<td th:text="${obj.ninnzuu}"></td>
+					<td th:text="${obj.zouin}"></td>
+					<td th:text="${obj.sousuu}"></td>
+					<td th:text="${obj.kbzouin}"></td>
+
+					<td>
+						<form method="GET"
+							th:action="@{/chapter_set1/{zid}(zid=${obj.zid})}">
+							<input type="hidden" name="yuname" th:value="${obj.yuname}">
+							<input type="submit" value="登録">
+						</form>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+
+
+		<div th:if="${jyouhouList != null && jyouhouList.size() == 0}">登録されているユニット情報はありません。</div>
+
+
+		<a href="#" th:href="@{/menu}">Menu画面に戻る</a> <br>
+
+		<h1>登録済み先攻チャプター戦力</h1>
+
+		<div class="wrap">
+			<div class="box box1">
+				<h3>登録済みユニット</h3>
+				<table border="1"
+					th:if="${chapter1List != null && chapter1List.size() >= 1}">
+					<thead>
+						<tr>
+
+							<th>登録ID</th>
+							<th>画像</th>
+							<th>ユニット名称</th>
+							<th>所属戦団</th>
+
+							<th>ユニット役割</th>
+							<th>パワーコスト</th>
+							<th>現実価格</th>
+
+							<th>削除</th>
+
+						</tr>
+					</thead>
+
+					<tbody th:each="obj : ${chapter1List}" align="center"
+						th:object=${obj}>
+						<tr>
+
+							<td th:text="${obj.id}"></td>
+
+							<td><img th:src="${'/images/'+ obj.img}" alt="" width="100"
+								height="100"></td>
+
+							<td th:text="${obj.yuname}" align="left"></td>
+							<td th:text="${obj.sendanm.fname}" align="left"></td>
+
+							<td th:text="${obj.unityakuwarim.ywname}" align="left"></td>
+
+							<td th:text="${obj.pck}"></td>
+							<td th:text="${obj.mck}"></td>
+
+							<td>
+								<form method="POST" th:action="@{/chapter_set1/delete}">
+									<input type="hidden" name="id" th:value="${obj.id}"> <input
+										type="submit" value="削除">
+								</form>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+
+				<div th:if="${chapter1List != null && chapter1List.size() == 0}">登録されているユニット情報はありません。</div>
+			</div>
+
+			<div class="box box2">
+				<h3>登録済み構成員</h3>
+				<table border="1"
+					th:if="${kouseiList != null && kouseiList.size() >= 1}">
+					<thead>
+						<tr>
+							<th>登録ID</th>
+
+							<th>構成員名称</th>
+
+							<th>ユニット分類</th>
+							<th>攻撃</th>
+							<th>耐久</th>
+							<th>傷</th>
+							<th>白兵回数</th>
+							<th>気力</th>
+							<th>防御1</th>
+							<th>防御2</th>
+							<th>アビリティ</th>
+
+
+						</tr>
+					</thead>
+
+					<tbody th:each="obj : ${kouseiList}" align="center"
+						th:object=${obj}>
+						<tr>
+							<td th:text="${obj.did}"></td>
+
+							<td th:text="${obj.kname}" align="left"></td>
+
+
+							<td th:text="${obj.unitbunruim.brname}" align="left"></td>
+
+							<td th:text="${obj.at}"></td>
+							<td th:text="${obj.taff}"></td>
+							<td th:text="${obj.uunz}"></td>
+							<td th:text="${obj.ak}"></td>
+							<td th:text="${obj.ld}"></td>
+							<td th:text="${obj.asa}"></td>
+							<td th:text="${obj.assp}"></td>
+							<td th:text="${obj.abl}" align="left"></td>
+
+
+
+						</tr>
+					</tbody>
+				</table>
+
+				<div th:if="${kouseiList != null && kouseiList.size() == 0}">登録されているユニット構成員情報はありません。</div>
+			</div>
+		</div>
+	</nav>
+
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+
+<title>ユニット能力劣化情報検索</title>
+</head>
+
+<body>
+	<nav class="unitrekka_f navbar-expand-lg fixed-top navbar-dark"
+		layout:fragment="nav">
+
+
+		<h1>ユニット能力劣化情報検索</h1>
+
+		<h3 th:text="${title}">タイトル</h3>
+
+		<form method="get" th:action="@{/unitrekka_f/select}"
+			th:object="${formUnitrekka}">
+
+			<label>所属戦団:</label> <select name="syozoku" th:field="*{sid}">
+				<option value="00"></option>
+				<option th:each="sendan : ${prefecturesList}"
+					th:value="${sendan.id}" th:text="${sendan.fname}"
+					th:selected="${sendan.id == selectedValue}"></option>
+			</select> <br> <label>ユニット役割:</label> <select name="yakuwari"
+				th:field="*{yid}">
+				<option value="00"></option>
+				<option th:each="yakuwari : ${unityakuwari}"
+					th:value="${yakuwari.id}" th:text="${yakuwari.ywname}"
+					th:selected="${yakuwari.id == selectedValue}"></option>
+			</select> <br> <input th:if="${id}" type="hidden" th:field="*{id}" /> <br>
+
+			<input type="submit" value="検索" name="SOUSIN">
+
+		</form>
+
+
+		<a href="#" th:href="@{/unitrekka_t/index}">ユニット能力劣化情報登録に戻る</a> <br>
+		<a href="#" th:href="@{/unitrekka_f/index}">ユニット能力劣化情報検索に戻る</a> <br>
+		<a href="#" th:href="@{/menu}">Menu画面に戻る</a>
+
+
+
+		<table border="1"
+			th:if="${rekkaList != null && rekkaList.size() >= 1}">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>ユニット番号</th>
+					<th>ユニット名称</th>
+					<th>分岐条件傷残量</th>
+					<th>移動力</th>
+					<th>接近戦技能値</th>
+					<th>射撃戦技能値</th>
+					<th>編集</th>
+					<th>削除</th>
+				</tr>
+			</thead>
+
+			<tbody th:each="obj : ${rekkaList}" align="center" th:object=${obj}>
+				<tr>
+					<td th:text="${obj.id}"></td>
+					<td th:text="${obj.zid}"></td>
+					<td th:text="${obj.Unitjyouhou.yuname}" align="left"></td>
+					<td th:text="${obj.kuunz}"></td>
+					<td th:text="${obj.mv}"></td>
+					<td th:text="${obj.ass}"></td>
+					<td th:text="${obj.scs}"></td>
+
+					<td>
+						<form method="GET" th:action="@{/unitrekka/{id}(id=${obj.id})}">
+							<input type="submit" value="編集">
+						</form>
+					</td>
+
+
+					<td>
+						<form method="POST" th:action="@{/unitrekka/delete}">
+							<input type="hidden" name="id" th:value="${obj.id}"> <input
+								type="submit" value="削除">
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div th:if="${rekkaList != null && rekkaList.size() == 0}">登録されているユニット能力劣化情報はありません。</div>
+
+
+
+	</nav>
+
+
+</body>
+
+</html>

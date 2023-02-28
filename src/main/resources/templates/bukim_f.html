@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+
+<title>武器情報検索</title>
+</head>
+
+<body>
+	<nav class="bukim_f navbar-expand-lg fixed-top navbar-dark"
+		layout:fragment="nav">
+
+		<h1>武器情報検索</h1>
+
+		<h3 th:text="${title}">タイトル</h3>
+
+		<form method="get" th:action="@{/bukim_f/select}"
+			th:object="${formBukim}">
+
+			<label>所属戦団:</label> <select name="syozoku" th:field="*{sid}">
+				<option value="00"></option>
+				<option th:each="sendan : ${prefecturesList}"
+					th:value="${sendan.id}" th:text="${sendan.fname}"
+					th:selected="${sendan.id == selectedValue}"></option>
+			</select> <br> <input th:if="${wno}" type="hidden" th:field="*{wno}" />
+			<br> <input type="submit" value="検索" name="SOUSIN">
+
+		</form>
+
+		<a href="#" th:href="@{/bukim/index}">武器情報マスタ画面に戻る</a> <br> <a
+			href="#" th:href="@{/bukim_f/index}">武器情報検索画面に戻る</a> <br> <a
+			href="#" th:href="@{/menu}">Menu画面に戻る</a>
+
+
+
+		<table border="1" th:if="${bukiList != null && bukiList.size() >= 1}">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>武器名称</th>
+
+					<th>所属戦団</th>
+
+					<th>種別</th>
+					<th>射程</th>
+					<th>攻撃力</th>
+					<th>貫通力</th>
+					<th>命中修正</th>
+					<th>攻撃回数</th>
+					<th>ダメージ</th>
+					<th>アビリティ</th>
+
+					<th>編集</th>
+					<th>削除</th>
+
+				</tr>
+			</thead>
+
+			<tbody th:each="obj : ${bukiList}" align="center" th:object=${obj}>
+				<tr>
+
+					<td th:text="${obj.wno}"></td>
+					<td th:text="${obj.wname}" align="left"></td>
+
+					<td th:text="${obj.sendanm.fname}" align="left"></td>
+
+					<td th:text="${obj.syubetu}" align="left"></td>
+					<td th:text="${obj.syatei}"></td>
+					<td th:text="${obj.at}"></td>
+					<td th:text="${obj.ap}"></td>
+					<td th:text="${obj.hit}"></td>
+					<td th:text="${obj.ks}"></td>
+					<td th:text="${obj.dmg}"></td>
+					<td th:text="${obj.abl}" align="left"></td>
+
+					<td>
+						<form method="GET" th:action="@{/bukim/{wno}(wno=${obj.wno})}">
+							<input type="submit" value="編集">
+						</form>
+					</td>
+
+
+					<td>
+						<form method="POST" th:action="@{/bukim/delete}">
+							<input type="hidden" name="wno" th:value="${obj.wno}"> <input
+								type="submit" value="削除">
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<div th:if="${bukiList != null && bukiList.size() == 0}">登録されている武器情報はありません。</div>
+
+
+
+
+	</nav>
+
+
+
+</body>
+
+</html>
