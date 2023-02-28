@@ -3,7 +3,7 @@ nav.navbar {
 	width: 100vw;
 	height: 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/empe.jpg');
+	background-image: url('/images/empe.jpg');
 	background-repeat: repeat-y
 }
 
@@ -24,7 +24,7 @@ nav.sendan {
 	color: red;
 	width: 100vw; height : 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/marines.jpg');
+	background-image: url('/images/marines.jpg');
 	background-repeat: repeat-y;
 	height: 100vh;
 }
@@ -33,7 +33,7 @@ nav.battle {
 	color: red;
 	width: 100vw; height : 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/battle.jpg');
+	background-image: url('/images/battle.jpg');
 	background-repeat: repeat-y;
 	height: 100vh;
 }
@@ -43,7 +43,7 @@ nav.bukim {
 	width: 100vw;
 	height: 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/bukim.jpg');
+	background-image: url('/images/bukim.jpg');
 	background-repeat: repeat-y
 }
 
@@ -51,7 +51,7 @@ nav.bukim_f {
 	color: red;
 	width: 100vw; height : 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/bukim_f.jpg');
+	background-image: url('/images/bukim_f.jpg');
 	background-repeat: repeat-y;
 	height: 100vh;
 }
@@ -60,7 +60,7 @@ nav.unitrekka {
 	color: red;
 	width: 100vw; height : 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/unitrekka.jpg');
+	background-image: url('/images/unitrekka.jpg');
 	background-repeat: repeat-y;
 	height: 100vh;
 }
@@ -69,7 +69,7 @@ nav.unitrekka_f {
 	color: red;
 	width: 100vw; height : 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/unitrekka_f.jpg');
+	background-image: url('/images/unitrekka_f.jpg');
 	background-repeat: repeat-y;
 	height: 100vh;
 }
@@ -78,7 +78,7 @@ nav.unitrekka_t {
 	color: red;
 	width: 100vw; height : 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/unitrekka_t.jpg');
+	background-image: url('/images/unitrekka_t.jpg');
 	background-repeat: repeat-y;
 	height: 100vh;
 }
@@ -86,28 +86,28 @@ nav.unitrekka_t {
 nav.unitkousei {
 	color: red;
 	background-size: 100%;
-	background-image: url('/css/img/unitkousei.jpg');
+	background-image: url('/images/unitkousei.jpg');
 	background-repeat: repeat-y
 }
 
 nav.unitkousei_f {
 	color: red;
 	background-size: 100%;
-	background-image: url('/css/img/unitkousei_f.jpg');
+	background-image: url('/images/unitkousei_f.jpg');
 	background-repeat: repeat-y
 }
 
 nav.unitkousei_h {
 	color: red;
 	background-size: 100%;
-	background-image: url('/css/img/unitkousei_h.jpg');
+	background-image: url('/images/unitkousei_h.jpg');
 	background-repeat: repeat-y
 }
 
 nav.unitkousei_kai {
 	color: red;
 	background-size: 100%;
-	background-image: url('/css/img/unitkousei_kai.jpg');
+	background-image: url('/images/unitkousei_kai.jpg');
 	background-repeat: repeat-y
 }
 
@@ -115,7 +115,7 @@ nav.unitbunruim {
 	color: red;
 	width: 100vw; height : 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/unitbunruim.jpg');
+	background-image: url('/images/unitbunruim.jpg');
 	background-repeat: repeat-y;
 	height: 100vh;
 }
@@ -123,14 +123,14 @@ nav.unitbunruim {
 nav.unitjyouhou {
 	color: red;
 	background-size: 100%;
-	background-image: url('/css/img/unitjyouhou.jpg');
+	background-image: url('/images/unitjyouhou.jpg');
 	background-repeat: repeat-y
 }
 
 nav.unitjyouhou_f {
 	color: red;
 	background-size: 100%;
-	background-image: url('/css/img/unitjyouhou_f.jpg');
+	background-image: url('/images/unitjyouhou_f.jpg');
 	background-repeat: repeat-y
 }
 
@@ -138,7 +138,7 @@ nav.unityakuwarim {
 	color: red;
 	width: 100vw; height : 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/unityakuwarim.jpg');
+	background-image: url('/images/unityakuwarim.jpg');
 	background-repeat: repeat-y;
 	height: 100vh;
 }
@@ -147,7 +147,7 @@ nav.chapter1 {
 	color: blue;
 	width: 100vw; height : 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/chapter1.jpg');
+	background-image: url('/images/chapter1.jpg');
 	background-repeat: repeat-y;
 	height: 100vh;
 }
@@ -163,7 +163,7 @@ nav.chapter2 {
 	color: blue;
 	width: 100vw; height : 100vh;
 	background-size: 100%;
-	background-image: url('/css/img/chapter2.jpg');
+	background-image: url('/images/chapter2.jpg');
 	background-repeat: repeat-y;
 	height: 100vh;
 }
